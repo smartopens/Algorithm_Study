@@ -17,9 +17,14 @@ struct NODE {
 	int num; // map 내 위치
 };
 
-// [5][22]
-vector<int> MAP[5]; // 윷놀이 판 - 0:기본, 1~3:파란화살표 진입 이후, 4: 25지점 이후
-int used[5][22]; // 현재 말이 존재하는가 아닌가를 표기
+vector<int> MAP[4]; // 윷놀이 판 - 0:기본, 1~3:파란화살표 진입 이후, 4: 25지점 이후
+
+// 0 시작 ~ 20 (40)
+// 21 (13) ~ 23 (19)
+// 24 (22) ~ 25 (24)
+// 26 (28) ~ 28 (26)
+// 29 (25) ~ 31 (35)
+int used[40]; // 현재 말이 존재하는가 아닌가를 표기
 NODE player[4]; // 4개의 말의 현위치
 
 int dice[10]; // 주사위 순서 (1~5)
@@ -32,10 +37,17 @@ void init() {
 		MAP[0].push_back(i * 2); // 각 칸의 점수
 	}
 
-	MAP[1].push_back(10); MAP[1].push_back(13); MAP[1].push_back(16); MAP[1].push_back(19); MAP[1].push_back(25);
-	MAP[2].push_back(20); MAP[2].push_back(22); MAP[2].push_back(24); MAP[2].push_back(25);
-	MAP[3].push_back(30); MAP[3].push_back(28); MAP[3].push_back(27); MAP[3].push_back(26); MAP[3].push_back(25);
-	MAP[4].push_back(25); MAP[4].push_back(30); MAP[4].push_back(35); MAP[4].push_back(40); MAP[4].push_back(42);
+	MAP[1].push_back(10); MAP[1].push_back(13); MAP[1].push_back(16); MAP[1].push_back(19);
+	MAP[2].push_back(20); MAP[2].push_back(22); MAP[2].push_back(24);
+	MAP[3].push_back(30); MAP[3].push_back(28); MAP[3].push_back(27); MAP[3].push_back(26);
+	
+	for (int i = 1; i <= 3; i++) {
+		MAP[i].push_back(25);
+		MAP[i].push_back(30);
+		MAP[i].push_back(35);
+		MAP[i].push_back(40);
+		MAP[i].push_back(42);
+	}
 
 	// 말 초기화
 	for (int i = 0; i < 4; i++) {
@@ -56,29 +68,37 @@ void play(int turn, int sum) {
 		NODE now = player[i];
 
 		if (MAP[now.ind][now.num] == 42) continue; // 이미 도착한 말은 이동 불가
-		
+
 		int dInd = 0, dNum = 0;
-		if (now.num + dice[turn] > MAP[now.ind].size()) {
-			if (now.ind == 0) {
-				dInd = 0; dNum = 21;
+		if (dInd == 0) {
+			if (dNum + dice[turn] >= MAP[dInd].size() - 1) {
+				player[i] = { dInd, MAP[dInd].size() - 1 };
+				
+				play(turn + 1, sum);
+				player[i] = { dInd, dNum };
 			}
 			else {
+				int nxtNum = dNum + dice[turn];
+				player[i] = { dInd, nxtNum };
 
+				if (MAP[dInd][nxtNum] == 10 || MAP[dInd][nxtNum] == 20 || MAP[dInd][nxtNum] == 30)
+					player[i] = { MAP[dInd][nxtNum] / 10 , 0 };
+
+				play(turn + 1, sum + MAP[dInd][dNum + dice[turn]]);
+				player[i] = { dInd, dNum };
 			}
 		}
-		else {
-			 
-		}
+		else if(dInd )
 	}
 }
 
 int main() {
 	init(); // 윷놀이판, 말 초기화
-	
+
 	// input
 	for (int i = 0; i < 10; i++) cin >> dice[i];
 
-	play(i, 0);
+	play(0, 0);
 
 	cout << ans;
 
