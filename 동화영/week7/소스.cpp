@@ -1,4 +1,4 @@
-/* 주사위 윷놀이 */
+/* 주사위 윷놀이 */ - 다시다시
 // play 상황 - 0(시작) ~ 42(도착)
 // 기본 이동 map - 다음 칸을 담는다
 // 파란칸에서 시작한다면 새로운 map으로 간다
@@ -40,7 +40,7 @@ void init() {
 	MAP[1].push_back(10); MAP[1].push_back(13); MAP[1].push_back(16); MAP[1].push_back(19);
 	MAP[2].push_back(20); MAP[2].push_back(22); MAP[2].push_back(24);
 	MAP[3].push_back(30); MAP[3].push_back(28); MAP[3].push_back(27); MAP[3].push_back(26);
-	
+
 	for (int i = 1; i <= 3; i++) {
 		MAP[i].push_back(25);
 		MAP[i].push_back(30);
@@ -73,7 +73,7 @@ void play(int turn, int sum) {
 		if (dInd == 0) {
 			if (dNum + dice[turn] >= MAP[dInd].size() - 1) {
 				player[i] = { dInd, MAP[dInd].size() - 1 };
-				
+
 				play(turn + 1, sum);
 				player[i] = { dInd, dNum };
 			}
@@ -88,7 +88,7 @@ void play(int turn, int sum) {
 				player[i] = { dInd, dNum };
 			}
 		}
-		else if(dInd )
+		else if (dInd)
 	}
 }
 
