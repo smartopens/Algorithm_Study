@@ -38,7 +38,7 @@ void rotate(int lev) {
 	memcpy(MAP, TMP, sizeof(MAP)); // 회전한 결과를 MAP으로 복사
 }
 
-// 주변에 얼음이 있는 칸이 3칸 미만 시
+// 주변에 얼음이 있는 칸이 3칸 미만시
 // 해당 칸의 얼음 줄어들기 -1
 void shrink() {
 	int tmp[MAX_N][MAX_N] = { 0, }; // 얼음이 줄어들 칸 표기용
