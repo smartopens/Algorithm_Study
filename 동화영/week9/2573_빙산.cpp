@@ -1,4 +1,4 @@
-/* ºù»ê */
+/* ë¹™ì‚° */
 #include <iostream>
 #include <cstring>
 #include <queue>
@@ -9,49 +9,49 @@ using namespace std;
 int rdir[DIR_NUM] = { -1, 1, 0, 0 };
 int cdir[DIR_NUM] = { 0, 0, -1, 1 };
 
-int MAP[MAX_N][MAX_N]; // Áöµµ
-int visited[MAX_N][MAX_N]; // ¹æ¹®¿©ºÎ ÀúÀå
+int MAP[MAX_N][MAX_N]; // ì§€ë„
+int visited[MAX_N][MAX_N]; // ë°©ë¬¸ì—¬ë¶€ ì €ì¥
 
-int N, M; // °İÀÚ »çÀÌÁî (N*M)
+int N, M; // ê²©ì ì‚¬ì´ì¦ˆ (N*M)
 
 void bfs(int r, int c) {
-	int TMP[MAX_N][MAX_N] = { 0, }; // ÀÌ¹ø ÅÏ¿¡ ÁÙ¾îµé ºù»êÀÇ ³ôÀÌ¸¦ ÀúÀå
+	int TMP[MAX_N][MAX_N] = { 0, }; // ì´ë²ˆ í„´ì— ì¤„ì–´ë“¤ ë¹™ì‚°ì˜ ë†’ì´ë¥¼ ì €ì¥
 
-	// bfsÅ½»öÀ» À§ÇÑ queue ÁØºñ
+	// bfsíƒìƒ‰ì„ ìœ„í•œ queue ì¤€ë¹„
 	queue<pair<int, int>> q;
 	q.push({ r, c });
 
-	visited[r][c] = 1; // ¹æ¹® Ç¥±â
+	visited[r][c] = 1; // ë°©ë¬¸ í‘œê¸°
 
 	while (!q.empty()) {
 		pair<int, int> now = q.front();
 		q.pop();
 
-		int cnt = 0; // nowÄ­ ±âÁØ 4¹æÇâÀ» Å½»öÇÏ¿© ³ôÀÌ°¡ 0ÀÎ Ä­ÀÇ ¼ö
+		int cnt = 0; // nowì¹¸ ê¸°ì¤€ 4ë°©í–¥ì„ íƒìƒ‰í•˜ì—¬ ë†’ì´ê°€ 0ì¸ ì¹¸ì˜ ìˆ˜
 		for (int i = 0; i < DIR_NUM; i++) {
 			int nr = now.first + rdir[i];
 			int nc = now.second + cdir[i];
 
-			// ³ôÀÌ°¡ 0ÀÎ Ä­Àº cnt¸¸ ¼¼°í Áö³ª°£´Ù
-			// 0ÀÎ Ä­Àº bfs Å½»öÀÇ ´ë»óÀÌ ¾Æ´Ï´Ù
+			// ë†’ì´ê°€ 0ì¸ ì¹¸ì€ cntë§Œ ì„¸ê³  ì§€ë‚˜ê°„ë‹¤
+			// 0ì¸ ì¹¸ì€ bfs íƒìƒ‰ì˜ ëŒ€ìƒì´ ì•„ë‹ˆë‹¤
 			if (MAP[nr][nc] == 0) {
 				cnt++;
 				continue;
 			}
 
-			if (visited[nr][nc] == 1) continue; // ±â¹æ¹®ÇÑ Ä­Àº ¹«½Ã
-			visited[nr][nc] = 1; // ¹æ¹® Ã³¸®
+			if (visited[nr][nc] == 1) continue; // ê¸°ë°©ë¬¸í•œ ì¹¸ì€ ë¬´ì‹œ
+			visited[nr][nc] = 1; // ë°©ë¬¸ ì²˜ë¦¬
 			q.push({ nr, nc });
 		}
 
-		TMP[now.first][now.second] = cnt; // ÁÖº¯¿¡ 0ÀÎ Ä­ÀÇ °³¼ö¸¦ ÀúÀå
+		TMP[now.first][now.second] = cnt; // ì£¼ë³€ì— 0ì¸ ì¹¸ì˜ ê°œìˆ˜ë¥¼ ì €ì¥
 	}
 
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < M; j++) {
-			// ÁÙ¾îµé ºù»êÀÇ ³ôÀÌ¸¸Å­ ±ğ¾ÆÁÖ±â
+			// ì¤„ì–´ë“¤ ë¹™ì‚°ì˜ ë†’ì´ë§Œí¼ ê¹ì•„ì£¼ê¸°
 			MAP[i][j] -= TMP[i][j];
-			if (MAP[i][j] < 0) MAP[i][j] = 0; // À½¼ö°¡ µÇ¾ú´Ù¸é 0À¸·Î ¸ÂÃçÁÖ±â
+			if (MAP[i][j] < 0) MAP[i][j] = 0; // ìŒìˆ˜ê°€ ë˜ì—ˆë‹¤ë©´ 0ìœ¼ë¡œ ë§ì¶°ì£¼ê¸°
 		}
 	}
 }
@@ -66,29 +66,29 @@ int main() {
 	}
 
 	// solve
-	int ans = 0; // Å½»ö Á¾·áµÇ´Âµ¥ °É¸° ½Ã°£
+	int ans = 0; // íƒìƒ‰ ì¢…ë£Œë˜ëŠ”ë° ê±¸ë¦° ì‹œê°„
 	while (1) {
-		memset(visited, 0, sizeof(visited)); // ¸Å ÅÏ¸¶´Ù visited ÃÊ±âÈ­
-		int cnt = 0; // ºù»ê ±×·ì °³¼ö
+		memset(visited, 0, sizeof(visited)); // ë§¤ í„´ë§ˆë‹¤ visited ì´ˆê¸°í™”
+		int cnt = 0; // ë¹™ì‚° ê·¸ë£¹ ê°œìˆ˜
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < M; j++) {
-				if (MAP[i][j] > 0 && visited[i][j] == 0) { // ºù»êÀÌ ³²¾ÆÀÖÀ¸¸é¼­ ¹Ì¹æ¹®ÀÎ Ä­ºÎÅÍ Å½»ö
-					bfs(i, j); // (i, j)ºÎÅÍ Å½»ö ½ÃÀÛ
-					cnt++; //ºù»ê ±×·ì Áõ°¡
+				if (MAP[i][j] > 0 && visited[i][j] == 0) { // ë¹™ì‚°ì´ ë‚¨ì•„ìˆìœ¼ë©´ì„œ ë¯¸ë°©ë¬¸ì¸ ì¹¸ë¶€í„° íƒìƒ‰
+					bfs(i, j); // (i, j)ë¶€í„° íƒìƒ‰ ì‹œì‘
+					cnt++; //ë¹™ì‚° ê·¸ë£¹ ì¦ê°€
 				}
 			}
 		}
 
-		// ±×·ìÀÌ 2°³ ÀÌ»óÀÌ¸é Å½»ö Á¾·á
-		// ±×·ìÀÌ 1°³ÀÌ¸é Å½»ö °è¼Ó
-		// ±×·ìÀÌ 0°³ÀÌ¸é 1°³¿´´ø ±×·ìÀÌ µ¿½Ã¿¡ »ç¶óÁø °ÍÀÌ¹Ç·Î Å½»ö Á¾·á
+		// ê·¸ë£¹ì´ 2ê°œ ì´ìƒì´ë©´ íƒìƒ‰ ì¢…ë£Œ
+		// ê·¸ë£¹ì´ 1ê°œì´ë©´ íƒìƒ‰ ê³„ì†
+		// ê·¸ë£¹ì´ 0ê°œì´ë©´ 1ê°œì˜€ë˜ ê·¸ë£¹ì´ ë™ì‹œì— ì‚¬ë¼ì§„ ê²ƒì´ë¯€ë¡œ íƒìƒ‰ ì¢…ë£Œ
 		if (cnt >= 2) break;
 		else if (cnt == 0) {
 			ans = 0;
 			break;
 		}
 
-		ans++; // ½Ã°£ Áõ°¡
+		ans++; // ì‹œê°„ ì¦ê°€
 	}
 
 	// output
