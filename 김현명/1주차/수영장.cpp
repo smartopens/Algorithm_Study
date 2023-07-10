@@ -31,7 +31,6 @@ void dfs(int idx, int n) {
     dfs(idx + 3, n);
     cost -= costs[2];
 
-
     if (m_plan[idx] == 0) { dfs(idx + 1, n); return; }
 
     cost += costs[0] * m_plan[idx];
