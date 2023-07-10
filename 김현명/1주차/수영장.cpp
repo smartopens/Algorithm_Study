@@ -4,10 +4,12 @@
 #include <cctype>
 #include <iostream>
 
-int n, tc;
+int n;
 int tc;
 int costs[4];
 int m_plan[12];
+int path[12];
+int visited[12];
 int cost;
 int answer = 21e8;
 
@@ -15,10 +17,7 @@ using namespace std;
 
 void dfs(int idx, int n) {
     if(idx >= n){
-        if (cost < answer)
-        {
-            answer = cost;
-        }
+    if(idx == n && cost < answer) answer = cost;
         return;
     }
 
@@ -32,10 +31,7 @@ void dfs(int idx, int n) {
     dfs(idx + 3, n);
     cost -= costs[2];
 
-    if (m_plan[idx] == 0) {
-        dfs(idx + 1, n);
-        return;
-    }
+    if (m_plan[idx] == 0) { dfs(idx + 1, n); return; }
 
     cost += costs[0] * m_plan[idx];
     dfs(idx + 1, n);
@@ -51,22 +47,14 @@ int main() {
     cin >> tc;
 
     for (int t = 0; t < tc; t++) {
+        for (int i = 0; i < 4; i++) cin >> costs[i];
+        for (int i = 0; i < 12; i++) cin >> m_plan[i];
+
         cost = 0;
         answer = 21e8;
-
-        for (int i = 0; i < 4; i++)
-        {
-            cin >> costs[i];
-        }
-
-        for (int i = 0; i < 12; i++)
-        {
-            cin >> costs[i];
-        }
-
         dfs(0, 12);
-
         cout << "#"<< t+1 << " " << answer << endl;
+
     }
     
     return 0;
