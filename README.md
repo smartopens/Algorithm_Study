@@ -12,10 +12,10 @@
 - 스터디 목표 : 취뽀
 - 문제 수 : 3문제 / 1주
 
-## 7월 5주차 문제
+## 7주차 문제
 
 |문제 출처|문제 제목|URL|
 |---|---|---|
-|백준|웜홀|https://www.acmicpc.net/problem/1865|
-|백준|이중 우선순위 큐|https://www.acmicpc.net/problem/7662|
-|백준|특정한 최단 경로|https://www.acmicpc.net/problem/1504|
+|백준|불|https://www.acmicpc.net/problem/5427|
+|백준|내일로 여행|https://www.acmicpc.net/problem/13168|
+|백준|거짓말|https://softeer.ai/practice/info.do?idx=1&eid=1043|
